@@ -24,15 +24,23 @@ describe('TestCase3', function () {
         await loginPage.login('standard_user', 'secret_sauce');
     });
 
-    it('Should add an item to cart and navigate to the cart page', async function () {
+     // Assertion login
+    it ('Login successfully and verify dashboard', async function() {
+        const dashboardPage = new DashboardPage(driver);
+        const title = await dashboardPage.isOnDashboard();
+        assert.strictEqual(title, 'Products', 'Expected dashboard to be Products');
+    });
+
+    // Assertion add item to cart
+    it('Successfully add item to cart and verify', async function () {
         const dashboardPage = new DashboardPage(driver);
         const title = await dashboardPage.isOnDashboard();
         assert.strictEqual(title, 'Products', 'Expected dashboard to be Products');
         
-        await dashboardPage.addItemToCart(); // ini Add item to cart
+        await dashboardPage.addItemToCart(); // Add item to cart
         
         const cartPage = new CartPage(driver);
-        await cartPage.navigate(); // ini Navigate to cart page
+        await cartPage.navigate(); // Navigate to cart page
         const pageTitle = await cartPage.isOnCartPage();
         assert.strictEqual(pageTitle, 'Your Cart', 'Expected to be on cart page');
     });
