@@ -4,7 +4,7 @@ const DashboardPage = require('./WebComponent/DashboardPage');
 const CartPage = require('./WebComponent/CartPage');
 const assert = require('assert');
 const fs = require('fs');
-
+ 
 const screenshotDir = './screenshot/';
 if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});
