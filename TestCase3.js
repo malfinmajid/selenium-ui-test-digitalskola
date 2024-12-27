@@ -25,24 +25,24 @@ describe('TestCase3', function () {
     });
 
      // Assertion login
+    // Validate user in dashboard after login
     it ('Login successfully and verify dashboard', async function() {
         const dashboardPage = new DashboardPage(driver);
         const title = await dashboardPage.isOnDashboard();
-        assert.strictEqual(title, 'Products', 'Expected dashboard to be Products');
+        assert.strictEqual(title, 'Products', 'Expected dashboard title is not found');
     });
 
     // Assertion add item to cart
+    // Add all item to cart
     it('Successfully add item to cart and verify', async function () {
         const dashboardPage = new DashboardPage(driver);
-        const title = await dashboardPage.isOnDashboard();
-        assert.strictEqual(title, 'Products', 'Expected dashboard to be Products');
-        
         await dashboardPage.addItemToCart(); // Add item to cart
         
+    // Successfully validate add item to cart page
         const cartPage = new CartPage(driver);
         await cartPage.navigate(); // Navigate to cart page
         const pageTitle = await cartPage.isOnCartPage();
-        assert.strictEqual(pageTitle, 'Your Cart', 'Expected to be on cart page');
+        assert.strictEqual(pageTitle, 'Your Cart', 'Expected cart title is not found in cart');
     });
 
     afterEach(async function () {
