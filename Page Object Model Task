@@ -24,7 +24,7 @@ describe('TestCase3', function () {
         await loginPage.login('standard_user', 'secret_sauce');
     });
 
-     // Assertion login
+    // Assertion login
     // Validate user in dashboard after login
     it ('Login successfully and verify dashboard', async function() {
         const dashboardPage = new DashboardPage(driver);
@@ -37,10 +37,10 @@ describe('TestCase3', function () {
     it('Successfully add item to cart and verify', async function () {
         const dashboardPage = new DashboardPage(driver);
         await dashboardPage.addItemToCart(); // Add item to cart
+        await dashboardPage.navigateToCart(); // Navigate to cart page
         
     // Successfully validate add item to cart page
         const cartPage = new CartPage(driver);
-        await cartPage.navigate(); // Navigate to cart page
         const pageTitle = await cartPage.isOnCartPage();
         assert.strictEqual(pageTitle, 'Your Cart', 'Expected cart title is not found in cart');
     });
