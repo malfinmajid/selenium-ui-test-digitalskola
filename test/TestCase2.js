@@ -1,27 +1,46 @@
 const { Builder } = require ('selenium-webdriver');
-const LoginPage = require('./WebComponent/LoginPage');
+const LoginPage = require('../WebComponent/LoginPage');
 const assert = require('assert');
 const fs = require('fs');
+require('dotenv').config();  
+
+const browser = process.env.BROWSER;
+const baseUrl = process.env.BASE_URL;
 
 const screenshotDir = './screenshot/';
 if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});
 }
 
-describe('TestCase2', function () {
+describe('TestCase 2 [login] #Smoke', function () {
     this.timeout(40000);
     let driver;
 
+// Testing on Multiple Browser
+    switch(browser.toLocaleLowerCase()){
+        case 'firefox':
+                const firefox = require('selenium-webdriver/firefox');
+                options = new firefox.Options();
+                options.addArguments('--headless');
+
+        case 'chrome':
+        default:
+                const chrome = require('selenium-webdriver/chrome');
+                options = new chrome.Options();
+                options.addArguments('--headless');
+                break;
+    }
+    
     // Run setiap mulai test, satu kali saja paling awal
     before(async function () {
-        driver = await new Builder().forBrowser('chrome').build();
+        driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
     });
     
     // Test suite dimulai dengan apa, setiap melakukan tes
     beforeEach(async function () {
         const loginPage = new LoginPage(driver);
-        await loginPage.navigate();
-        await loginPage.login('standard', 'secret_sauce');
+        await loginPage.navigate(baseUrl);
+        await loginPage.login('standard', 'sauce');
     });
 
     // Assertion atau validasi

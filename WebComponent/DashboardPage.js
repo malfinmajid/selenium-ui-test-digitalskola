@@ -6,21 +6,22 @@ class DashboardPage {
         this.addToCartButtonBackpack = By.xpath("//button[@id='add-to-cart-sauce-labs-backpack']");
         this.addToCartButtonBikelight = By.xpath("//button[@id='add-to-cart-sauce-labs-bike-light']");
         this.addToCartButtonTshirt = By.xpath("//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']");
-        this.addToCartButtonJacket = By.xpath("//button[@id='add-to-cart-sauce-labs-fleece-jacket']");
-        this.addToCartButtonOnesie = By.xpath("//button[@id='add-to-cart-sauce-labs-onesie']");
     }
-
+ 
     async isOnDashboard(){
         const title = await this.driver.findElement(By.className('title'));
         return title.getText();
+    }
+
+    async navigateToCart(){
+        const cartButton = await this.driver.findElement(By.xpath("//span[@class='shopping_cart_badge']"));
+        return cartButton.click();
     }
 
     async addItemToCart() {
         await this.driver.findElement(this.addToCartButtonBackpack).click();
         await this.driver.findElement(this.addToCartButtonBikelight).click();
         await this.driver.findElement(this.addToCartButtonTshirt).click();
-        await this.driver.findElement(this.addToCartButtonJacket).click();
-        await this.driver.findElement(this.addToCartButtonOnesie).click();
     }
 }
 

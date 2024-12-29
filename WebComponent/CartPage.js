@@ -4,14 +4,16 @@ class CartPage {
     constructor(driver) {
         this.driver = driver;
         this.pageTitle = By.className('title');
-    }
-
-    async navigate() {
-        await this.driver.get('https://www.saucedemo.com/cart.html');
+        this.checkOutButton = By.xpath("//button[@id='checkout']");
     }
 
     async isOnCartPage() {
-        return await this.driver.findElement(this.pageTitle).getText();
+        const title = await this.driver.findElement(By.className('title'));
+        return title.getText();
+    }
+
+    async navigateToCheckOut(){
+        await this.driver.findElement(this.checkOutButton).click();    
     }
 }
 
