@@ -16,5 +16,5 @@ class CartPage {
         await this.driver.findElement(this.checkOutButton).click();    
     }
 }  
-
+ 
 module.exports = CartPage;

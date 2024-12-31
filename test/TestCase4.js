@@ -11,7 +11,7 @@ const browser = process.env.BROWSER;
 const baseUrl = process.env.BASE_URL;
 const username = process.env.USER_NAME;
 const password = process.env.PASSWORD;
-
+ 
 const screenshotDir = './screenshot/';
 if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});

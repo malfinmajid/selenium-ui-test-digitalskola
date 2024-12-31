@@ -16,5 +16,5 @@ class checkOutPageStepTwo {
         await this.driver.findElement(this.finishButton).click();
     }
 }
-  
+   
 module.exports = checkOutPageStepTwo;

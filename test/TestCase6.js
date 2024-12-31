@@ -18,7 +18,7 @@ const screenshotDir = './screenshot/';
 if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});
 }
-
+ 
 describe('TestCase 6 [finish checkout] #Regression', function () {
     this.timeout(40000);
     let driver;

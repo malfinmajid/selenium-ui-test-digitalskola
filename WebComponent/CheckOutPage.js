@@ -13,7 +13,7 @@ class CheckOutPage {
     async isOnCheckOutPage() {
         return await this.driver.findElement(this.pageCheckOutTitle).getText();
     }
-
+ 
     async fillCheckoutForm(firstName, lastName, zipCode) {
         await this.driver.findElement(this.firstNameInput).sendKeys(firstName);
         await this.driver.findElement(this.lastNameInput).sendKeys(lastName);
