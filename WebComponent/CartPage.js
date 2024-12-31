@@ -15,6 +15,6 @@ class CartPage {
     async navigateToCheckOut(){
         await this.driver.findElement(this.checkOutButton).click();    
     }
-}
+}  
 
 module.exports = CartPage;

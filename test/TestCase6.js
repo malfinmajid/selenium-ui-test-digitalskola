@@ -54,11 +54,21 @@ describe('TestCase 6 [finish checkout] #Regression', function () {
         assert.strictEqual(title, 'Products', 'Expected dashboard title is not found');
     });
 
-    // Assertion add item to cart
+    // Assertion add item 
     // Add all item to cart
-    it('Successfully add item to cart and verify', async function () {
+    it('Successfully add item and verify', async function () {
         const dashboardPage = new DashboardPage(driver);
         await dashboardPage.addItemToCart(); // Add item to cart
+
+        const title = await dashboardPage.isOnDashboard();
+        assert.strictEqual(title, 'Products', 'Expected item did not add to cart');
+    });
+
+    // Assertion item in cart
+    // All item on the cart
+    it('Successfully item on cart and verify', async function () {
+        const dashboardPage = new DashboardPage(driver);
+        // await dashboardPage.addItemToCart(); // Add item to cart
         await dashboardPage.navigateToCart(); // Navigate to cart page
         
     // Successfully validate add item to cart page
@@ -67,8 +77,9 @@ describe('TestCase 6 [finish checkout] #Regression', function () {
         assert.strictEqual(pageTitle, 'Your Cart', 'Expected cart title is not found in cart');
     });
  
-     // Assertion: Validate checkout step one page
-     it('Successfully Checkout Step One and verify', async function () {
+    // Assertion: Validate checkout step one page
+    // Fill out the checkout form
+    it('Successfully Checkout Step One and verify', async function () {
         // Initialize DashboardPage
         const dashboardPage = new DashboardPage(driver);
         await dashboardPage.navigateToCart(); // Navigate to cart page
@@ -86,7 +97,9 @@ describe('TestCase 6 [finish checkout] #Regression', function () {
         await checkOutPage.fillCheckoutForm('Kevin', 'Parker', '12345');
     });
 
-   it('Successfully Checkout Step Two and verify', async function () {
+    // Assertion validate all information 
+    // Check the information
+    it('Successfully Checkout Step Two and verify', async function () {
         // Initialize DashboardPage
         const dashboardPage = new DashboardPage(driver);
         await dashboardPage.navigateToCart(); // Navigate to cart page
@@ -108,36 +121,6 @@ describe('TestCase 6 [finish checkout] #Regression', function () {
         const checkOutPageStepTwo = new CheckOutPageStepTwo(driver);
         const pageTitleStepTwo = await checkOutPageStepTwo.isOnCheckOutStepTwo();
         assert.strictEqual(pageTitleStepTwo, 'Checkout: Overview', 'Expected Checkout Step Two title is not found');
-    });
-
-    it('Checkout Successfully and verify', async function () {
-        // Initialize DashboardPage
-        const dashboardPage = new DashboardPage(driver);
-        await dashboardPage.navigateToCart(); // Navigate to cart page
-    
-        // Navigate to checkout page
-        const cartPage = new CartPage(driver);
-        await cartPage.navigateToCheckOut();
-    
-        // Validate checkout step one
-        const checkOutPage = new CheckOutPage(driver);
-
-        // Fill out the checkout form
-        await checkOutPage.fillCheckoutForm('Kevin', 'Parker', '12345');
-    
-        // Click continue button
-        await checkOutPage.clickContinue();
-    
-        // Validate checkout step two
-        const checkOutPageStepTwo = new CheckOutPageStepTwo(driver);
-
-        // Click finish button
-        await checkOutPageStepTwo.clickFinishButton();
-        
-        // Validate checkout successfully
-        const finishPage = new FinishPage(driver);
-        const pageFinishTitle = await finishPage.isOnFinishPage();
-        assert.strictEqual(pageFinishTitle, 'Checkout: Complete!', 'Expected Checkout failed');
     });
     
     afterEach(async function () {

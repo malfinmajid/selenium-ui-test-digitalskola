@@ -18,7 +18,7 @@ class LoginPage {
         await this.driver.findElement(this.passwordInput).sendKeys(password);
         await this.driver.findElement(this.loginButton).click(); 
     }
-
+ 
     async getErrorMessage(){
         try{
             const errorElemenet = await this.driver.findElement(this.errorMessage);

@@ -19,7 +19,7 @@ class CheckOutPage {
         await this.driver.findElement(this.lastNameInput).sendKeys(lastName);
         await this.driver.findElement(this.zipCodeInput).sendKeys(zipCode);
     }
-
+  
     async clickContinue() {
         await this.driver.findElement(this.continueButton).click();
     }

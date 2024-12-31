@@ -17,7 +17,7 @@ class DashboardPage {
         const cartButton = await this.driver.findElement(By.xpath("//span[@class='shopping_cart_badge']"));
         return cartButton.click();
     }
-
+ 
     async addItemToCart() {
         await this.driver.findElement(this.addToCartButtonBackpack).click();
         await this.driver.findElement(this.addToCartButtonBikelight).click();

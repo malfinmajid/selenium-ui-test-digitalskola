@@ -56,34 +56,25 @@ describe('TestCase 4 [checkout] #Regression', function () {
 
     // Assertion add item to cart
     // Add all item to cart
-    it('Successfully add item to cart and verify', async function () {
+    it('Successfully add item and verify', async function () {
         const dashboardPage = new DashboardPage(driver);
         await dashboardPage.addItemToCart(); // Add item to cart
+
+        const title = await dashboardPage.isOnDashboard();
+        assert.strictEqual(title, 'Products', 'Expected item did not add to cart');
+    });
+
+    // Assertion item in cart
+    // All item on the cart
+    it('Successfully item on cart and verify', async function () {
+        const dashboardPage = new DashboardPage(driver);
+        // await dashboardPage.addItemToCart(); // Add item to cart
         await dashboardPage.navigateToCart(); // Navigate to cart page
         
     // Successfully validate add item to cart page
         const cartPage = new CartPage(driver);
         const pageTitle = await cartPage.isOnCartPage();
         assert.strictEqual(pageTitle, 'Your Cart', 'Expected cart title is not found in cart');
-    });
- 
-    // Assertion: Validate checkout step one page
-    it('Successfully Checkout Step One and verify', async function () {
-        // Initialize DashboardPage
-        const dashboardPage = new DashboardPage(driver);
-        await dashboardPage.navigateToCart(); // Navigate to cart page
-    
-        // Navigate to checkout page
-        const cartPage = new CartPage(driver);
-        await cartPage.navigateToCheckOut();
-
-        // Validate checkout step one
-        const checkOutPage = new CheckOutPage(driver);
-        const pageCheckOutTitle = await checkOutPage.isOnCheckOutPage();
-        assert.strictEqual(pageCheckOutTitle, 'Checkout: Your Information', 'Expected checkout step one title is not found');
-
-        // Fill out the checkout form
-        await checkOutPage.fillCheckoutForm('Kevin', 'Parker', '12345');
     });
     
     afterEach(async function () {

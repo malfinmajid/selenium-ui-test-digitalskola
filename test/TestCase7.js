@@ -4,6 +4,7 @@ const DashboardPage = require('../WebComponent/DashboardPage');
 const CartPage = require('../WebComponent/CartPage');
 const CheckOutPage = require('../WebComponent/CheckOutPage');
 const CheckOutPageStepTwo = require('../WebComponent/CheckOutPageStepTwo');
+const FinishPage = require('../WebComponent/FinishPage');
 const assert = require('assert');
 const fs = require('fs');
 require('dotenv').config();    
@@ -18,10 +19,9 @@ if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});
 }
 
-describe('TestCase 5 [checkoutStepTwo] #Regression', function () {
+describe('TestCase 6 [finish checkout] #Regression', function () {
     this.timeout(40000);
     let driver;
-
     // Testing on Multiple Browser
     switch(browser.toLocaleLowerCase()){
         case 'firefox':
@@ -36,7 +36,6 @@ describe('TestCase 5 [checkoutStepTwo] #Regression', function () {
                 options.addArguments('--headless');
                 break;
     }
-
     before(async function () {
         driver = await new Builder().forBrowser(browser).setChromeOptions(options).build();
     });
@@ -55,7 +54,7 @@ describe('TestCase 5 [checkoutStepTwo] #Regression', function () {
         assert.strictEqual(title, 'Products', 'Expected dashboard title is not found');
     });
 
-    // Assertion add item to cart
+    // Assertion add item 
     // Add all item to cart
     it('Successfully add item and verify', async function () {
         const dashboardPage = new DashboardPage(driver);
@@ -96,6 +95,63 @@ describe('TestCase 5 [checkoutStepTwo] #Regression', function () {
 
         // Fill out the checkout form
         await checkOutPage.fillCheckoutForm('Kevin', 'Parker', '12345');
+    });
+
+    // Assertion validate all information 
+    // Check the information
+    it('Successfully Checkout Step Two and verify', async function () {
+        // Initialize DashboardPage
+        const dashboardPage = new DashboardPage(driver);
+        await dashboardPage.navigateToCart(); // Navigate to cart page
+    
+        // Navigate to checkout page
+        const cartPage = new CartPage(driver);
+        await cartPage.navigateToCheckOut();
+    
+        // Validate checkout step one
+        const checkOutPage = new CheckOutPage(driver);
+
+        // Fill out the checkout form
+        await checkOutPage.fillCheckoutForm('Kevin', 'Parker', '12345');
+    
+        // Click continue button
+        await checkOutPage.clickContinue();
+    
+        // Validate checkout step two
+        const checkOutPageStepTwo = new CheckOutPageStepTwo(driver);
+        const pageTitleStepTwo = await checkOutPageStepTwo.isOnCheckOutStepTwo();
+        assert.strictEqual(pageTitleStepTwo, 'Checkout: Overview', 'Expected Checkout Step Two title is not found');
+    });
+
+    // Success checkout
+    it('Checkout Successfully and verify', async function () {
+        // Initialize DashboardPage
+        const dashboardPage = new DashboardPage(driver);
+        await dashboardPage.navigateToCart(); // Navigate to cart page
+    
+        // Navigate to checkout page
+        const cartPage = new CartPage(driver);
+        await cartPage.navigateToCheckOut();
+    
+        // Validate checkout step one
+        const checkOutPage = new CheckOutPage(driver);
+
+        // Fill out the checkout form
+        await checkOutPage.fillCheckoutForm('Kevin', 'Parker', '12345');
+    
+        // Click continue button
+        await checkOutPage.clickContinue();
+    
+        // Validate checkout step two
+        const checkOutPageStepTwo = new CheckOutPageStepTwo(driver);
+
+        // Click finish button
+        await checkOutPageStepTwo.clickFinishButton();
+        
+        // Validate checkout successfully
+        const finishPage = new FinishPage(driver);
+        const pageFinishTitle = await finishPage.isOnFinishPage();
+        assert.strictEqual(pageFinishTitle, 'Checkout: Complete!', 'Expected Checkout failed');
     });
     
     afterEach(async function () {
