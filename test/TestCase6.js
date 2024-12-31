@@ -19,7 +19,7 @@ if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});
 }
  
-describe('TestCase 6 [finish checkout] #Regression', function () {
+describe('TestCase 6 [checkout step two] #Regression', function () {
     this.timeout(40000);
     let driver;
     // Testing on Multiple Browser
