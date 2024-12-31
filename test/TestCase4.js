@@ -17,7 +17,7 @@ if (!fs.existsSync(screenshotDir)){
     fs.mkdirSync(screenshotDir, {recursive: true});
 }
  
-describe('TestCase 4 [checkout] #Regression', function () {
+describe('TestCase 4 [item on cart] #Regression', function () {
     this.timeout(40000);
     let driver;
 
