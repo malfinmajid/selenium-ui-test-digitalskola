@@ -10,4 +10,4 @@
     "test-login": "mocha --grep '[login]'",
     "test-smoke": "mocha --grep '#Smoke'"
   }
-}
+} 
